@@ -121,11 +121,13 @@
             <section>{{lounge.lounge_description}}</section>
             <section>{{lounge.lounge_students}}</section>
             <section class="actions ac">
-                <form action="">
+                <form action="{% url 'updateLoungeForm' lounge.id %}" method="post">
+                    {% csrf_token %}
                     <button class="acOne"><i class="bi bi-pencil-square"></i></button>
                 </form>
 
-                <form action="">
+                <form action="{% url 'deleteLounge' lounge.id %}" method="get">
+                    {% csrf_token %}
                     <button class="acTwo"><i class="bi bi-trash3-fill"></i></button>
                 </form>
             </section>

@@ -3,13 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Create Lounge</title>
+    
+    <!-- Vincula la CDN de Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
 <body>
-    <form action="{% url 'createLounge' %}" method="post">
-        {% csrf_token %}
-        {{formCreate}}
-        <input type="submit" value="Create Lounge">
-    </form>
+    <div class="container mt-5">
+        <form action="{% url 'createLounge' %}" method="post">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ formCreate.lounge_number.label_tag }}
+                {{ formCreate.lounge_number }}
+            </div>
+            <div class="mb-3">
+                {{ formCreate.lounge_description.label_tag }}
+                {{ formCreate.lounge_description }}
+            </div>
+            <div class="mb-3">
+                {{ formCreate.lounge_students.label_tag }}
+                {{ formCreate.lounge_students }}
+            </div>
+            <button type="submit" class="btn btn-primary">Create Lounge</button>
+        </form>
+    </div>
+
+    <!-- Vincula la CDN de Bootstrap JS (jQuery y Popper.js son necesarios) -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

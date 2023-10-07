@@ -27,5 +27,36 @@ def createLounge(request):
     else: 
         
         return redirect('createLoungeView')
+    
 
-
+def deleteLounge(request, id):
+    lounge = Lounge.objects.get(id=id)
+    
+    if request.method == 'GET':
+        lounge.delete()
+        return redirect('indexLounge')
+    else:
+        return redirect('indexLounge')
+    
+def updateLoungeView(request, id):
+    lounge = Lounge.objects.get(id=id)
+    
+    if request.method == 'POST':
+        return render(request, 'updateLounge.html', {
+            'loungeUpdate': lounge,
+            'formUpdate': createLoungeForm()
+        })
+        
+def updateLounge(request, id):
+    lounge = Lounge.objects.get(id=id)
+    
+    if request.method == 'POST':
+        lounge.lounge_number = request.POST['lounge_number']
+        lounge.lounge_description = request.POST['lounge_description']
+        lounge.lounge_students = request.POST['lounge_students']
+        
+        lounge.save()
+        
+        return redirect('indexLounge')
+    else:
+        return redirect('updateLoungeForm')
