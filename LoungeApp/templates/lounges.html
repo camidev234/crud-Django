@@ -115,11 +115,11 @@
             <section class="h3 mod">Estudiantes</section>
             <section class="h5 mod">Acciones</section>
         </div>
-
+        {% for lounge in lounges %}
         <div class="row">
-            <section></section>
-            <section></section>
-            <section></section>
+            <section>{{lounge.lounge_number}}</section>
+            <section>{{lounge.lounge_description}}</section>
+            <section>{{lounge.lounge_students}}</section>
             <section class="actions ac">
                 <form action="">
                     <button class="acOne"><i class="bi bi-pencil-square"></i></button>
@@ -130,10 +130,11 @@
                 </form>
             </section>
         </div>
+        {% endfor %}
     </div>
 
     <div class="create">
-        <a href="">Crate New Lounge</a>
+        <a href="{% url 'createLoungeView' %}">Crate New Lounge</a>
     </div>
 </body>
 </html>
