@@ -1,0 +1,9 @@
+<h1>Tareas</h1>
+
+{% for tarea in tareas %}
+
+<div>
+    <h4>{{tarea.title}}-{{tarea.description}}-{{tarea.project.name}}</h4>
+</div>
+
+{% endfor %}

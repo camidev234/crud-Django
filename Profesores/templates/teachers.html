@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <title>Document</title>
+
+    <style>
+        * {
+            font-family: sans-serif;
+        }
+
+        .tittle {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .fields {
+            width: 80%;
+            height: auto;
+            margin: auto;
+            /* display: flex; */
+            border: 1px solid #eee;
+        }
+
+        .headerFields {
+            display: flex;
+            width: 100%;
+            background-color: rgb(29, 29, 29);
+            height: 50px;
+        }
+
+        .mod {
+            width: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+        }
+
+        .row {
+            width: 100%;
+            display: flex;
+            border: 1px solid #eee;
+        }
+
+        .row section {
+            width: 20%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50px;
+        }
+
+        .actions {
+            display: flex;
+            gap: 13px;
+        }
+
+        .actions form button {
+            width: 40px;
+            height: 27px;
+            cursor: pointer;
+        }
+
+        .actions form button i {
+            color: white;
+        }
+
+        .acOne {
+            background-color: rgb(0, 0, 255);
+            border: none;
+        }
+
+        .acTwo {
+            background-color: rgb(255, 19, 19);
+            border: none;
+        }
+
+        
+
+        .create {
+            width: 100%;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 40px;
+        }
+
+        .create a {
+            text-decoration: none;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 3px;
+            background-color: rgb(35, 177, 58);
+        }
+
+        
+
+    </style>
+</head>
+<body>
+
+    <div class="tittle">
+        <h1>View All Teachers</h1>
+    </div>
+    <div class="fields">
+        <div class="headerFields">
+            <section class="h1 mod">Nombre</section>
+            <section class="h2 mod">Apellido</section>
+            <section class="h3 mod">Edad</section>
+            <section class="h4 mod">Email</section>
+            <section class="h5 mod">Acciones</section>
+        </div>
+        {% for teacher in teachers %}
+        <div class="row">
+            <section>{{teacher.name}}</section>
+            <section>{{teacher.lastname}}</section>
+            <section>{{teacher.age}}</section>
+            <section>{{teacher.email}}</section>
+            <section class="actions ac">
+                <form action="{% url 'teacherUpdate' teacher.id %}" method="POST">
+                    {% csrf_token %}
+                    <button class="acOne"><i class="bi bi-pencil-square"></i></button>
+                </form>
+
+                <form action="{% url 'deleteTeacher' teacher.id %}" method="POST">
+                    {% csrf_token %}
+                    <button class="acTwo"><i class="bi bi-trash3-fill"></i></button>
+                </form>
+            </section>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="create">
+        <a href="{% url 'createTeacherView' %}">Crate New Teacher</a>
+    </div>
+</body>
+</html>
