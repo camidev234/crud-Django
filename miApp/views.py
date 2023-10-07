@@ -46,4 +46,5 @@ def deleteProject(request, id):
         return redirect('viewProjects')
     
     return redirect('viewProjects')
+
     

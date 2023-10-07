@@ -20,5 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # referenciando las rutas de la aplicacion miApp con el prefix miApp/
     path('miApp/', include('miApp.urls')),
-    path('teachers/', include('Profesores.urls'))
+    path('teachers/', include('Profesores.urls')),
+    path('lounges/', include('LoungeApp.urls')),
 ]
