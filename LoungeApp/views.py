@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from .models import Lounge
+from .models import Lounge, Teachers_lounges
+from Profesores import models as m
 from .forms import createLoungeForm
 # Create your views here.
 
@@ -60,3 +61,32 @@ def updateLounge(request, id):
         return redirect('indexLounge')
     else:
         return redirect('updateLoungeForm')
+
+
+def indexLoungesTeachers(request):
+    allLoungesTeach = Teachers_lounges.objects.all()
+    
+    return render(request, 'loungesTeacher.html', {
+        'loungesTeachers': allLoungesTeach 
+    })
+    
+def createLoungeTeacherView(request):
+    teachers = m.Teacher.objects.all()
+    lounges = Lounge.objects.all()
+    return render(request, 'asignLt.html', {
+        'teachers': teachers,
+        'lounges': lounges
+    })
+    
+def assignLounge(request):
+    if request.method == 'POST':
+        Teachers_lounges.objects.create(
+            teacher_id = request.POST['teacher_id'],
+            lounge_id = request.POST['lounge_id']
+        )
+        
+        return redirect('indexLt')
+    else:
+        return redirect('assignLt')
+    
+    

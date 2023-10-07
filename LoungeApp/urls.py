@@ -6,5 +6,8 @@ urlpatterns = [
     path('saveLounge/', v.createLounge, name='createLounge'),
     path('deleteLounge/<int:id>', v.deleteLounge, name='deleteLounge'),
     path('updateLoungeF/<int:id>', v.updateLoungeView, name='updateLoungeForm'),
-    path('updateLounge/<int:id>', v.updateLounge, name='updateLounge')
+    path('updateLounge/<int:id>', v.updateLounge, name='updateLounge'),
+    path('viewAllLT/', v.indexLoungesTeachers, name='indexLt'),
+    path('assignLt/', v.createLoungeTeacherView, name='assignLt'),
+    path('assignLounge/', v.assignLounge, name='saveAssignLt'),
 ]

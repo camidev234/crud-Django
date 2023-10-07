@@ -1,5 +1,5 @@
 from django.db import models
-
+from Profesores import models as m
 # Create your models here.
 
 
