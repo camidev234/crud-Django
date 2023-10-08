@@ -1,14 +1,60 @@
 from django.shortcuts import render, redirect
 from .models import Lounge, Teachers_lounges
+from django.http import HttpResponse
 from Profesores import models as m
 from .forms import createLoungeForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.models import User
 # Create your views here.
+
+
+
+def signUpView(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    
+    return render(request, 'signUp.html', {
+            'form': form 
+        })
+
+
+def loginUser(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, request.POST)
+        if form.is_valid():
+            # Autenticar al usuario
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            
+            if user is not None:
+                login(request, user)
+                return redirect('indexLounge')
+    else:
+        form = AuthenticationForm()
+    
+    return render(request, 'login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('login')       
 
 def indexLounge(request):
     lounges = Lounge.objects.all()
-    return render(request, 'lounges.html', {
-        'lounges': lounges
-    })
+    
+    user = request.user
+    
+    if request.method == 'GET':
+        return render(request, 'lounges.html', {
+            'lounges': lounges,
+            'user': user
+        })
     
 def createLoungeView(request):
     return render(request, 'createLounge.html', {
@@ -102,5 +148,5 @@ def viewTeachersLounges(request, id_lounge):
             'lounges': lounge,
             'teachers': teachers
         })
-    
-    
+    else:
+        return redirect('indexLt')

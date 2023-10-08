@@ -121,6 +121,17 @@
     <div class="tittle">
         <h1>View All Lounges</h1>
     </div>
+
+    <div class="welcome">
+        {% if user.is_authenticated %}
+        <h1>Bienvenido {{ user.username }}</h1>
+        {% else %}
+        <h1>No has iniciado sesion</h1>
+        {% endif %}
+
+        <a href="{% url 'logout' %}">Logout</a>
+    </div>
+
     <div class="fields">
         <div class="headerFields">
             <section class="h1 mod">Numero de ficha</section>
