@@ -1,9 +1,11 @@
 from django.urls import path
 from . import views as v
 urlpatterns = [
-    path('', v.indexLounge, name='indexLounge'),
+    path('', v.indexUser, name='index'),
+    path('indexLounge/', v.indexLounge, name='indexLounge'),
+    path('authError/', v.login_required_error, name='userAuthError'),
     path('signUpForm/', v.signUpView, name='signUpView'),
-    path('loginForm/', v.loginUser, name='login'),
+    path('loginForm/', v.loginUser, name='loginUser'),
     path('logout/', v.logout_view, name='logout'),
     path('createLoungeForm/', v.createLoungeView, name='createLoungeView'),
     path('saveLounge/', v.createLounge, name='createLounge'),
