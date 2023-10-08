@@ -89,4 +89,18 @@ def assignLounge(request):
     else:
         return redirect('assignLt')
     
+def viewTeachersLounges(request, id_lounge):
+    teachersLounges = Teachers_lounges.objects.filter(lounge_id=id_lounge)
+    lounge = Lounge.objects.get(id=id_lounge)
+    teachers = []
+    
+    for teacherLounge in teachersLounges:
+        teachers.append(teacherLounge.teacher)
+    
+    if request.method == 'GET':
+        return render(request, 'teachersLounges.html', {
+            'lounges': lounge,
+            'teachers': teachers
+        })
+    
     

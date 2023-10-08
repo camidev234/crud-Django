@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    <title>Document</title>
+    <title>All Lounges</title>
 
     <style>
         * {
@@ -34,7 +34,7 @@
         }
 
         .mod {
-            width: 25%;
+            width: 20%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -48,11 +48,24 @@
         }
 
         .row section {
-            width: 25%;
+            width: 20%;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 50px;
+        }
+
+        .viewTeachers form button {
+            background-color: #093b28;
+            color: white;
+            border: none;
+            height: 30px;
+            border-radius: 3px;
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
         }
 
         .actions {
@@ -113,6 +126,7 @@
             <section class="h1 mod">Numero de ficha</section>
             <section class="h2 mod">Descripcion</section>
             <section class="h3 mod">Estudiantes</section>
+            <section class="h4 mod">Ver profesores</section>
             <section class="h5 mod">Acciones</section>
         </div>
         {% for lounge in lounges %}
@@ -120,6 +134,12 @@
             <section>{{lounge.lounge_number}}</section>
             <section>{{lounge.lounge_description}}</section>
             <section>{{lounge.lounge_students}}</section>
+            <section class="viewTeachers">
+                <form action="{% url 'filterTeachers' lounge.id %}" method="GET">
+                    {% csrf_token %}
+                    <button><i class="bi bi-eye-fill"></i><span>Profesores de esta ficha</span</button>
+                </form>
+            </section>
             <section class="actions ac">
                 <form action="{% url 'updateLoungeForm' lounge.id %}" method="post">
                     {% csrf_token %}

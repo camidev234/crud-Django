@@ -10,4 +10,5 @@ urlpatterns = [
     path('viewAllLT/', v.indexLoungesTeachers, name='indexLt'),
     path('assignLt/', v.createLoungeTeacherView, name='assignLt'),
     path('assignLounge/', v.assignLounge, name='saveAssignLt'),
+    path('viewTeachersFromLounge/<int:id_lounge>', v.viewTeachersLounges, name='filterTeachers'),
 ]
